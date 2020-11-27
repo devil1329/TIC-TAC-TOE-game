@@ -4,28 +4,28 @@ bool rowcrossed(char gm[][3],int r)
 {
     if((gm[r][0]==gm[r][1]) && (gm[r][1]==gm[r][2]) && (gm[r][2]!='.'))
     {    
-    cout<<"rc"<<endl;
-     return (true);}
+        return (true);
+    }
     return(false);
 }
 bool colcrossed(char gm[][3],int c)
 {
     if((gm[0][c]==gm[1][c]) && (gm[1][c]==gm[2][c]) && (gm[2][c]!='.'))
     {     
-    cout<<"cc"<<endl;
-    return (true);}
+        return (true);
+    }
     return (false);
 }
 bool diacrossed(char gm[][3])
 {
     if((gm[0][0]==gm[1][1]) && (gm[1][1]==gm[2][2]) && (gm[2][2]!='.'))
     {    
-    cout<<"di1"<<endl;
-    return (true);}
+        return (true);
+    }
     if((gm[0][2]==gm[1][1]) && (gm[1][1]==gm[2][0]) && (gm[2][0]!='.'))
     {    
-    cout<<"di2"<<endl;
-     return (true);}
+        return (true);
+    }
     return (false);
 }
 bool gameres(char gm[][3],int r,int c)
@@ -34,7 +34,7 @@ bool gameres(char gm[][3],int r,int c)
 }
 int play(char p[3][3],char x)
 {
-    int r,c,f=0;
+    int r,c,f=0,i,j;
     do{
         cout<<"Choose a row number (0 to 2) :"<<endl;cin>>r;
         if(r>-1&&r<3){
@@ -43,23 +43,26 @@ int play(char p[3][3],char x)
                 cout<<c<<" is not a valid column."<<endl;
             }
             else
-                f=1;
+            {
+                if(p[r][c]!='.'){
+                    cout<<"this is already occupied position"<<endl;
+                }
+                else
+                {
+                    f=1;
+                }
+                
+            }
         }
         else{
             cout<<r<<" is not a valid row."<<endl;
-        }
-        if(p[r][c]!='.')
-            p[r][c]=x;
-        else
-        {
-            f=1;
-        }
-        
+        }    
     }while(f!=1);
+    p[r][c]=x;
     system("CLS");
-    for(r=0;r<3;r++){
-        for(c=0;c<3;c++){
-            cout<<p[r][c]<<" ";
+    for(i=0;i<3;i++){
+        for(j=0;j<3;j++){
+            cout<<p[i][j]<<" ";
         }
         cout<<endl;
     }
@@ -83,10 +86,10 @@ void game(string pl1,string pl2,char x,char o)
         if(k%2==0){
             cout<<"Player of current turn:"<<pl1<<endl;
             f=play(gm,x);
-            cout<<f<<endl;
             if(f==1){
                 cout<<"Game is over:"<<endl<<pl1<<" wins!"<<endl;
                 k=10;
+                getchar();
             }
         }
         else{
@@ -95,6 +98,7 @@ void game(string pl1,string pl2,char x,char o)
             if(f==1){
                 cout<<"Game is over:"<<endl<<pl2<<" wins!"<<endl;
                 k=10;
+                getchar();
             }
         }
     }
