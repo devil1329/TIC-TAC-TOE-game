@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 bool rowcrossed(char gm[][3],int r)
 {
